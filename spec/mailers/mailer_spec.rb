@@ -51,4 +51,31 @@ describe Mailer do
       expect(user.subscriptions_token).to eq "subscriptions_token_value"
     end
   end
+
+  describe "multitenancy" do
+    let!(:default_asset_host) { ActionMailer::Base.asset_host }
+
+    before do
+      allow(ActionMailer::Base).to receive(:default_url_options).and_return({ host: "consul.dev" })
+      ActionMailer::Base.asset_host = "http://assets.consul.dev"
+    end
+
+    after { ActionMailer::Base.asset_host = default_asset_host }
+
+    it "uses the current tenant when using delayed jobs", :delay_jobs do
+      create(:tenant, subdomain: "delay")
+
+      Apartment::Tenant.switch("delay") do
+        Setting["org_name"] = "Delayed tenant"
+
+        Mailer.delay.user_invite("test@consul.dev")
+      end
+
+      Delayed::Worker.new.work_off
+      body = ActionMailer::Base.deliveries.last.body.to_s
+      expect(body).to match "Delayed tenant"
+      expect(body).to match "href=\"http://delay.consul.dev/"
+      expect(body).to match "src=\"http://delay.assets.consul.dev/"
+    end
+  end
 end
