@@ -3,5 +3,14 @@
 
   <%= f.text_field :name %>
   <%= f.text_field :subdomain %>
+
+  <fieldset>
+    <legend><%= t("admin.tenants.sn_login") %></legend>
+    <%= f.text_field :twitter_key, label: t("admin.tenants.tenant.twitter_key") %>
+    <%= f.text_field :twitter_secret, label: t("admin.tenants.tenant.twitter_secret") %>
+    <%= f.text_field :facebook_key, label: t("admin.tenants.tenant.facebook_key") %>
+    <%= f.text_field :facebook_secret, label: t("admin.tenants.tenant.facebook_secret") %>
+  </fieldset>
+
   <%= f.submit %>
 <% end %>

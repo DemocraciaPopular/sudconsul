@@ -1626,6 +1626,12 @@ es:
         create: Crear entidad
       new:
         title: Nueva entidad
+      sn_login: Acceso con Redes Sociales
+      tenant:
+        twitter_key: Twitter Key
+        twitter_secret: Twitter Secret
+        facebook_key: Facebook Key
+        facebook_secret: Facebook Secret
       title: "Entidad:"
       update:
         success: Entidad actualizada correctamente

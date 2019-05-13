@@ -1627,6 +1627,12 @@ en:
         create: Create tenant
       new:
         title: New tenant
+      sn_login: Login with Social Networks
+      tenant:
+        twitter_key: Twitter Key
+        twitter_secret: Twitter Secret
+        facebook_key: Facebook Key
+        facebook_secret: Facebook Secret
       title: "Tenant:"
       update:
         success: Tenant updated successfully

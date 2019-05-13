@@ -30,6 +30,7 @@ class Admin::TenantsController < Admin::BaseController
   private
 
     def tenant_params
-      params.require(:tenant).permit(:name, :subdomain)
+      params.require(:tenant).permit(:name, :subdomain,
+        :twitter_key, :twitter_secret, :facebook_key, :facebook_secret)
     end
 end

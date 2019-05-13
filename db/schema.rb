@@ -1562,6 +1562,10 @@ ActiveRecord::Schema.define(version: 2021_11_03_112944) do
     t.string "subdomain"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "twitter_key"
+    t.string "twitter_secret"
+    t.string "facebook_key"
+    t.string "facebook_secret"
     t.index ["subdomain"], name: "index_tenants_on_subdomain", unique: true
   end
 

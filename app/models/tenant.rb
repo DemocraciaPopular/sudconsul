@@ -20,6 +20,10 @@ class Tenant < ActiveRecord::Base
     end
   end
 
+  def self.current
+    find_by(subdomain: current_subdomain)
+  end
+
   private
 
     def create_schema
