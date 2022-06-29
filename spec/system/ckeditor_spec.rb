@@ -19,6 +19,7 @@ describe "CKEditor" do
   end
 
   scenario "uploading an image through the upload tab", :admin do
+    Setting["url"] = ""
     visit new_admin_site_customization_page_path
     fill_in_ckeditor "Content", with: "Filling in to make sure CKEditor is loaded"
     find(".cke_button__image").click
