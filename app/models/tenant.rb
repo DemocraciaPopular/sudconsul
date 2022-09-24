@@ -14,6 +14,12 @@ class Tenant < ActiveRecord::Base
     Apartment::Tenant.current
   end
 
+  def self.run_on_each(&block)
+    Apartment.tenant_names.union(["public"]).each do |subdomain|
+      Apartment::Tenant.switch(subdomain, &block)
+    end
+  end
+
   private
 
     def create_schema

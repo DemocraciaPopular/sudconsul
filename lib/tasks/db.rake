@@ -11,10 +11,10 @@ namespace :db do
     logger = ApplicationLogger.new
 
     logger.info "Calculating tsvector for comments"
-    Comment.with_hidden.find_each(&:calculate_tsvector)
+    Tenant.run_on_each { Comment.with_hidden.find_each(&:calculate_tsvector) }
 
     logger.info "Calculating tsvector for proposal notifications"
-    ProposalNotification.with_hidden.find_each(&:calculate_tsvector)
+    Tenant.run_on_each { ProposalNotification.with_hidden.find_each(&:calculate_tsvector) }
   end
 
   desc "Adds the schema search path for future multitenant compatibility"
