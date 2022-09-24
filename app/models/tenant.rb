@@ -6,6 +6,14 @@ class Tenant < ActiveRecord::Base
   after_update :rename_schema
   after_destroy :destroy_schema
 
+  def self.default?
+    Apartment::Tenant.current == "public"
+  end
+
+  def self.current_subdomain
+    Apartment::Tenant.current
+  end
+
   private
 
     def create_schema
