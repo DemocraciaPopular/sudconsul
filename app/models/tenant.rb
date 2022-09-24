@@ -18,6 +18,14 @@ class Tenant < ActiveRecord::Base
     Apartment::Tenant.switch(...)
   end
 
+  def self.current_subdomain
+    Apartment::Tenant.current
+  end
+
+  def self.default?
+    current_subdomain == "public"
+  end
+
   private
 
     def create_schema
