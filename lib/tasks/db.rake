@@ -16,4 +16,24 @@ namespace :db do
     logger.info "Calculating tsvector for proposal notifications"
     ProposalNotification.with_hidden.find_each(&:calculate_tsvector)
   end
+
+  desc "Adds the schema search path for future multitenant compatibility"
+  task add_schema_search_path: :environment do
+    ApplicationLogger.new.info "Adding search path to config/database.yml"
+
+    config = Rails.application.config.paths["config/database"].first
+    lines = File.readlines(config)
+
+    adapter_indeces = lines.map.with_index do |line, index|
+      index if line.start_with?("  adapter: postgresql")
+    end.compact
+
+    adapter_indeces.reverse_each do |index|
+      unless lines[index + 1]&.match?("schema_search_path")
+        lines.insert(index + 1, "  schema_search_path: \"public,shared_extensions\"\n")
+      end
+    end
+
+    File.write(config, lines.join)
+  end
 end
