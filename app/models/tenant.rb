@@ -32,6 +32,14 @@ class Tenant < ActiveRecord::Base
     ActionMailer::Base.default_url_options[:host]
   end
 
+  def self.current_subdomain
+    Apartment::Tenant.current
+  end
+
+  def self.default?
+    current_subdomain == "public"
+  end
+
   def self.switch(...)
     Apartment::Tenant.switch(...)
   end
