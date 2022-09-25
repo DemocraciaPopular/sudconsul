@@ -785,6 +785,7 @@ en:
       comments: "Comments"
       local_census_records: Manage local census
       machine_learning: "AI / Machine learning"
+      multitenancy: Multitenancy
     administrators:
       index:
         title: Administrators
@@ -1624,6 +1625,16 @@ en:
             notice: "Card updated successfully"
           destroy:
             notice: "Card removed successfully"
+    tenants:
+      create:
+        notice: Tenant created successfully
+      index:
+        title: Multitenancy
+        create: Create tenant
+      new:
+        title: New tenant
+      update:
+        notice: Tenant updated successfully
     homepage:
       title: Homepage
       description: The active modules appear in the homepage in the same order as here.

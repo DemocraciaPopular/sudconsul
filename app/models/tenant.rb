@@ -62,6 +62,14 @@ class Tenant < ActiveRecord::Base
     end
   end
 
+  def domain
+    if self.class.default_host == "localhost"
+      "#{subdomain}.lvh.me"
+    else
+      "#{subdomain}.#{self.class.default_host}"
+    end
+  end
+
   private
 
     def create_schema
