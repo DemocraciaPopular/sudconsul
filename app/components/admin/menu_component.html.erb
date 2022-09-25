@@ -131,4 +131,7 @@
       <%= link_to t("admin.menu.machine_learning"), admin_machine_learning_path, class: "ml-link" %>
     </li>
   <% end %>
+  <li <%= "class=is-active" if controller_name == "tenants" %>>
+    <%= link_to t("admin.menu.multitenancy"), admin_tenants_path %>
+  </li>
 </ul>
