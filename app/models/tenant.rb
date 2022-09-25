@@ -1,5 +1,5 @@
 class Tenant < ActiveRecord::Base
-  validates :subdomain, presence: true, uniqueness: true
+  validates :subdomain, presence: true, uniqueness: true, format: { with: URI::DEFAULT_PARSER.regexp[:HOST] }
   validates :name, presence: true
 
   after_create :create_schema
