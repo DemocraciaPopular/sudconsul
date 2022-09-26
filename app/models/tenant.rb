@@ -36,6 +36,10 @@ class Tenant < ActiveRecord::Base
     Apartment::Tenant.current
   end
 
+  def self.current_url_options
+    ApplicationMailer.new.default_url_options
+  end
+
   def self.current_secrets
     if default?
       Rails.application.secrets
