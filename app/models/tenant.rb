@@ -43,6 +43,10 @@ class Tenant < ActiveRecord::Base
     end
   end
 
+  def self.current_url_options
+    ApplicationMailer.new.default_url_options
+  end
+
   private
 
     def create_schema
