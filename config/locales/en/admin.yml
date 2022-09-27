@@ -693,6 +693,7 @@ en:
           submit_button: Create question
         table:
           title: Title
+          description: "Description"
           question_options: Question options
           answers_count: Answers count
           comments_count: Comments count

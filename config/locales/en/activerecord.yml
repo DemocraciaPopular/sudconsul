@@ -436,6 +436,7 @@ en:
         question_options: Options
       legislation/question/translation:
         title: Question
+        description: "Description"
       legislation/question_option:
         value: Value
       legislation/annotation:

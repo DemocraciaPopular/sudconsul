@@ -21,6 +21,7 @@
        <thead>
           <tr>
             <th><%= t("admin.legislation.questions.table.title") %></th>
+            <th><%= t("admin.legislation.questions.table.description") %></th>
             <th><%= t("admin.legislation.questions.table.question_options") %></th>
             <th class="text-center"><%= t("admin.legislation.questions.table.answers_count") %></th>
             <th class="text-center"><%= t("admin.legislation.questions.table.comments_count") %></th>
@@ -32,6 +33,7 @@
             <td>
               <%= link_to question.title, edit_admin_legislation_process_question_path(@process, question) %>
             </td>
+            <td><%= sanitize_and_auto_link(question.description) %></td>
             <td>
               <ul>
                 <% question.question_options.each do |question_option| %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_03_112944) do
+ActiveRecord::Schema.define(version: 2022_09_24_224924) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -860,6 +860,7 @@ ActiveRecord::Schema.define(version: 2021_11_03_112944) do
     t.datetime "updated_at", null: false
     t.text "title"
     t.datetime "hidden_at"
+    t.string "description"
     t.index ["hidden_at"], name: "index_legislation_question_translations_on_hidden_at"
     t.index ["legislation_question_id"], name: "index_d34cc1e1fe6d5162210c41ce56533c5afabcdbd3"
     t.index ["locale"], name: "index_legislation_question_translations_on_locale"

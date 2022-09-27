@@ -692,6 +692,7 @@ es:
           submit_button: Crear pregunta
         table:
           title: Título
+          description: "Descripción"
           question_options: Opciones de respuesta
           answers_count: Número de respuestas
           comments_count: Número de comentarios
