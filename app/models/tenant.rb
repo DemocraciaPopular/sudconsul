@@ -36,6 +36,17 @@ class Tenant < ActiveRecord::Base
     Apartment::Tenant.current
   end
 
+  def self.current_secrets
+    if default?
+      Rails.application.secrets
+    else
+      @secrets ||= {}
+      @secrets[current_subdomain] ||= Rails.application.secrets.merge(
+        Rails.application.secrets.dig(:tenants, current_subdomain.to_sym).to_h
+      )
+    end
+  end
+
   def self.default?
     current_subdomain == "public"
   end

@@ -5,6 +5,7 @@ class ApplicationMailer < ActionMailer::Base
   default from: proc { "#{Setting["mailer_from_name"]} <#{Setting["mailer_from_address"]}>" }
   layout "mailer"
   before_action :set_asset_host
+  after_action :set_smtp_settings
 
   def default_url_options
     if Tenant.default?
@@ -20,6 +21,10 @@ class ApplicationMailer < ActionMailer::Base
         uri.host = host_with_subdomain_for(uri.host)
       end.to_s
     end
+  end
+
+  def set_smtp_settings
+    mail.delivery_method.settings.merge!(Tenant.current_secrets.smtp_settings.to_h)
   end
 
   private
