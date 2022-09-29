@@ -26,6 +26,17 @@ class Tenant < ActiveRecord::Base
     current_subdomain == "public"
   end
 
+  def self.current_secrets
+    if default?
+      Rails.application.secrets
+    else
+      @secrets ||= {}
+      @secrets[current_subdomain] ||= Rails.application.secrets.merge(
+        Rails.application.secrets.dig(:tenants, current_subdomain.to_sym).to_h
+      )
+    end
+  end
+
   private
 
     def create_schema
