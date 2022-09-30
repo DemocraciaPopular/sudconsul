@@ -134,6 +134,9 @@ module Consul
     config.autoload_paths << "#{Rails.root}/app/graphql/custom"
     config.autoload_paths << "#{Rails.root}/app/models/custom"
     config.paths["app/views"].unshift(Rails.root.join("app", "views", "custom"))
+
+    # Set to true to enable an administration interface to manage tenants
+    config.multitenancy = Rails.application.secrets.multitenancy
   end
 end
 
