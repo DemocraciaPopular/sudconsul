@@ -10,8 +10,21 @@ class Tenant < ActiveRecord::Base
   after_update :rename_schema
   after_destroy :destroy_schema
 
+  def self.name_for(host)
+    local_hosts = %w[localhost lvh.me example.com www.example.com]
+    return nil if host.blank? || host.match?(Resolv::AddressRegex) || local_hosts.include?(host)
+
+    domain = if host.ends_with?(".lvh.me")
+               "lvh.me"
+             else
+               default_host
+             end
+
+    host.sub(/\Awww\./, "").sub(/#{domain}\Z/, "").sub(/\.\Z/, "").presence
+  end
+
   def self.excluded_subdomains
-    Apartment::Elevators::Subdomain.excluded_subdomains + %w[mail shared_extensions]
+    %w[mail public shared_extensions www]
   end
 
   def self.switch(...)
@@ -43,8 +56,20 @@ class Tenant < ActiveRecord::Base
     end
   end
 
+  def self.default_host
+    ActionMailer::Base.default_url_options[:host]
+  end
+
   def self.current_url_options
     ApplicationMailer.new.default_url_options
+  end
+
+  def domain
+    if self.class.default_host == "localhost"
+      "#{subdomain}.lvh.me"
+    else
+      "#{subdomain}.#{self.class.default_host}"
+    end
   end
 
   private

@@ -18,7 +18,7 @@
         <td><%= tenant.subdomain %></td>
         <td>
           <%= render Admin::TableActionsComponent.new(tenant, actions: [:edit]) do |actions| %>
-            <%= actions.action(:show, text: t("shared.show"), path: root_url(subdomain: tenant.subdomain)) %>
+            <%= actions.action(:show, text: t("shared.show"), path: root_url(host: tenant.domain)) %>
           <% end %>
         </td>
       </tr>
