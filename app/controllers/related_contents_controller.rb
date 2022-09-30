@@ -18,7 +18,7 @@ class RelatedContentsController < ApplicationController
     elsif related_content.duplicate?
       flash[:error] = t("related_content.error_duplicate")
     else
-      flash[:error] = t("related_content.error", url: Setting["url"])
+      flash[:error] = t("related_content.error", url: protocol_with_host)
     end
     redirect_to polymorphic_path(related_content.parent_relationable)
   end
@@ -41,7 +41,11 @@ class RelatedContentsController < ApplicationController
     end
 
     def valid_url?
-      params[:url].start_with?(Setting["url"])
+      params[:url].start_with?(protocol_with_host)
+    end
+
+    def protocol_with_host
+      "#{request.protocol}#{request.host}"
     end
 
     def child_relationable_params

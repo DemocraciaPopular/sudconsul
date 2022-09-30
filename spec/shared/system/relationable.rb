@@ -6,7 +6,6 @@ shared_examples "relationable" do |relationable_model_name|
 
   before do
     integration_session.host = Capybara.app_host # TODO: remove after upgrading to Rails 6.1
-    Setting["url"] = Capybara.app_host
   end
 
   scenario "related contents are listed" do
@@ -77,7 +76,7 @@ shared_examples "relationable" do |relationable_model_name|
       click_button "Add"
     end
 
-    expect(page).to have_content "Link not valid. Remember to start with #{Capybara.app_host}."
+    expect(page).to have_content "Link not valid. Remember to start with #{Capybara.app_host}"
   end
 
   scenario "returns error when relating content URL to itself" do
